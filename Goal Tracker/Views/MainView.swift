@@ -61,7 +61,7 @@ struct MainView: View {
             
             // Add more goals...
             let shortGoal2 = Goal(
-                title: "Setup Development Environment",
+                title: "Setup Development Environment Where everything is going to work and install necessary tools",
                 details: "Install Xcode and necessary tools",
                 goalType: .short,
                 dueDate: Date().addingTimeInterval(3 * 24 * 3600) // 3 days from now

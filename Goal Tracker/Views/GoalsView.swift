@@ -12,32 +12,39 @@ struct GoalsView: View {
     @Query var goals: [Goal]
     
     var body: some View {
-        VStack {
-            NavigationStack {
-                List(goals) { goal in
-                    NavigationLink(destination: GoalDetailView()) {
+        NavigationStack {
+            List(goals) { goal in
+                NavigationLink {
+                    GoalDetailView()
+                } label: {
+                    HStack {
+                        Text("") //THIS IS NEEDED BECAUSE DIVIDING LINE WILL NOT START AT BEGINNING WITHOUT IT???
+                        Image(systemName: "flag.fill")
+                            .foregroundStyle(goal.color)
+                            .font(.title2)
+                            .frame(width: 35, height: 35)
+                            .background(Color(.systemGray6))
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .padding(.trailing, 8)
                         VStack(alignment: .leading) {
                             Text(goal.title)
                                 .font(.headline)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .padding(.bottom, 1)
                             Text("\(goal.dueDate.formatted(date: .abbreviated, time: .omitted))")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
-                            Text("\(goal.type)")
-                                .font(.caption)
-                                .foregroundStyle(goal.color)
-                            
                         }
+                        Spacer()
                     }
                 }
-                .onAppear {
-                    print("Number: \(goals.count)")
-                }
-                .navigationTitle("Goals")
-                Spacer()
+                
                 
             }
+            .navigationTitle("Goals")
+            Spacer()
         }
-        
     }
 }
 
