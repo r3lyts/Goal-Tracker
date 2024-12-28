@@ -16,6 +16,7 @@ struct OverviewView: View {
                     .foregroundStyle(.gray)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading)
+                
                 Text("Overview")
                     .font(.largeTitle)
                     .fontWeight(.bold)
