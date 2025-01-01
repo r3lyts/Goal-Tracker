@@ -15,7 +15,7 @@ struct GoalsView: View {
         NavigationStack {
             List(goals) { goal in
                 NavigationLink {
-                    GoalDetailView()
+                    GoalDetailView(goal: goal)
                 } label: {
                     HStack {
                         Text("") //THIS IS NEEDED BECAUSE DIVIDING LINE WILL NOT START AT BEGINNING WITHOUT IT???
@@ -29,11 +29,11 @@ struct GoalsView: View {
                         VStack(alignment: .leading) {
                             Text(goal.title)
                                 .font(.headline)
-                                .lineLimit(1)
+                                .lineLimit(2)
                                 .truncationMode(.tail)
-                                .padding(.bottom, 1)
+                                
                             Text("\(goal.dueDate.formatted(date: .abbreviated, time: .omitted))")
-                                .font(.caption2)
+                                .font(.subheadline)
                                 .foregroundColor(.gray)
                         }
                         Spacer()

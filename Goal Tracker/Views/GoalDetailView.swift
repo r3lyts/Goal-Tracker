@@ -7,13 +7,27 @@
 import SwiftUI
 
 struct GoalDetailView: View {
+    let goal: Goal
+    init(goal: Goal) {
+        self.goal = goal
+    }
+    
     var body: some View {
-        Text("working goals details view")
+        Text("Goal Details")
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading)
+        Text("Title: \(goal.title)")
+        Text("Details: \(goal.details ?? "")")
+        Text("Due Date: \(goal.dueDate)")
+        Text("Goal Type: \(goal.goalType)")
+        Spacer()
     }
 }
 
 #Preview {
-    GoalDetailView()
+    GoalDetailView(goal: Goal(title: "Test Goal", details: nil, goalType: .short, dueDate: Date(), isCompleted: false))
         .environmentObject(GoalsManager())
 
 }
