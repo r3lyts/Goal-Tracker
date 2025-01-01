@@ -18,18 +18,22 @@ struct GoalsView: View {
                     GoalDetailView(goal: goal)
                 } label: {
                     HStack {
-                        Text("") //THIS IS NEEDED BECAUSE DIVIDING LINE WILL NOT START AT BEGINNING WITHOUT IT???
+                        //THIS IS NEEDED BECAUSE DIVIDING LINE WILL NOT START AT BEGINNING WITHOUT IT???
                         Image(systemName: "flag.fill")
                             .foregroundStyle(goal.color)
                             .font(.title2)
-                            .frame(width: 35, height: 35)
+                            .frame(width: 42, height: 42)
                             .background(Color(.systemGray6))
                             .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(goal.color, lineWidth: 1)
+                            )
                             .padding(.trailing, 8)
                         VStack(alignment: .leading) {
                             Text(goal.title)
                                 .font(.headline)
-                                .lineLimit(2)
+                                .lineLimit(1)
                                 .truncationMode(.tail)
                                 
                             Text("\(goal.dueDate.formatted(date: .abbreviated, time: .omitted))")

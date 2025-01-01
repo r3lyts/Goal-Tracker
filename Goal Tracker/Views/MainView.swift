@@ -83,10 +83,18 @@ struct MainView: View {
                 dueDate: Date().addingTimeInterval(180 * 24 * 3600) // 180 days from now
             )
             
+            let mediumGoal2 = Goal(
+                title: "Build iOS App",
+                details: "Complete the iOS app using SwiftUIComplete the iOS app using SwiftUIComplete the iOS app using SwiftUIComplete the iOS app using SwiftUIComplete the iOS app using SwiftUIComplete the iOS app using SwiftUI",
+                goalType: .medium,
+                dueDate: Date().addingTimeInterval(-3 * 24 * 3600) // 3 days ago
+            )
+            
             modelContext.insert(shortGoal1)
             modelContext.insert(shortGoal2)
             modelContext.insert(mediumGoal)
             modelContext.insert(longGoal)
+            modelContext.insert(mediumGoal2)
             try? modelContext.save()
             print("Test data loaded")
         } else {

@@ -7,7 +7,8 @@
 import SwiftUI
 
 struct GoalDetailView: View {
-    let goal: Goal
+    var goal: Goal
+    
     init(goal: Goal) {
         self.goal = goal
     }
@@ -18,10 +19,31 @@ struct GoalDetailView: View {
             .fontWeight(.bold)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading)
-        Text("Title: \(goal.title)")
-        Text("Details: \(goal.details ?? "")")
-        Text("Due Date: \(goal.dueDate)")
-        Text("Goal Type: \(goal.goalType)")
+      
+    
+        
+        List {
+            Section("Goal Title") {
+                Text("\(goal.title)")
+            }
+            Section("Goal Details") {
+                Text("\(goal.details ?? "")")
+            }
+            Section("Due Date") {
+                Text("\(goal.dueDate.formatted(date: .long, time: .omitted))")
+                Text("\(goal.daysRemaining) Days Remaining")
+            }
+            Section("Type") {
+                Label {
+                    Text("\(goal.goalType.capitalized) Term Goal")
+                 } icon: {
+                        Image(systemName: "flag.fill")
+                         .foregroundStyle(goal.color)
+                    }
+                
+            }
+            
+        }
         Spacer()
     }
 }

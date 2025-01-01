@@ -32,6 +32,16 @@ class Goal: Identifiable {
         self.isCompleted = isCompleted
     }
     
+    //Finds the days remaining until the due date.
+    var daysRemaining: Int {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        guard let days = calendar.dateComponents([.day], from: currentDate, to: dueDate).day else {
+            return 0
+        }
+        return max(days, 0) //If past due (negative), only returns 0 as no days are remaining
+    }
+    
     var type: GoalType {
         get { GoalType(rawValue: goalType) ?? .short }  // Provide a default value
         set { goalType = newValue.rawValue }
