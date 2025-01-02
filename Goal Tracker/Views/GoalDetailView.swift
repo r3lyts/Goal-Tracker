@@ -14,35 +14,30 @@ struct GoalDetailView: View {
     }
     
     var body: some View {
-        Text("Goal Details")
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading)
-      
-    
-        
-        List {
-            Section("Goal Title") {
-                Text("\(goal.title)")
-            }
-            Section("Goal Details") {
-                Text("\(goal.details ?? "")")
-            }
-            Section("Due Date") {
-                Text("\(goal.dueDate.formatted(date: .long, time: .omitted))")
-                Text("\(goal.daysRemaining) Days Remaining")
-            }
-            Section("Type") {
-                Label {
-                    Text("\(goal.goalType.capitalized) Term Goal")
-                 } icon: {
-                        Image(systemName: "flag.fill")
-                         .foregroundStyle(goal.color)
+        NavigationStack {
+            VStack(alignment: .leading) {
+                List {
+                    Section("Goal Title") {
+                        Text("\(goal.title)")
                     }
-                
+                    Section("Goal Details") {
+                        Text("\(goal.details ?? "")")
+                    }
+                    Section("Due Date") {
+                        Text("\(goal.dueDate.formatted(date: .long, time: .omitted))")
+                        Text("\(goal.daysRemaining) Days Remaining")
+                    }
+                    Section("Type") {
+                        Label {
+                            Text("\(goal.goalType.capitalized) Term Goal")
+                        } icon: {
+                            Image(systemName: "flag.fill")
+                                .foregroundStyle(goal.color)
+                        }
+                    }
+                }
+                .navigationTitle("Goal Details")
             }
-            
         }
         Spacer()
     }

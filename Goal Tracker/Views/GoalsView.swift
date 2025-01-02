@@ -18,7 +18,6 @@ struct GoalsView: View {
                     GoalDetailView(goal: goal)
                 } label: {
                     HStack {
-                        //THIS IS NEEDED BECAUSE DIVIDING LINE WILL NOT START AT BEGINNING WITHOUT IT???
                         Image(systemName: "flag.fill")
                             .foregroundStyle(goal.color)
                             .font(.title2)
