@@ -23,11 +23,12 @@ struct GoalsView: View {
                             .font(.title2)
                             .frame(width: 42, height: 42)
                             .background(Color(.systemGray6))
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .clipShape(Circle())
                             .overlay(
-                                RoundedRectangle(cornerRadius: 5)
+                                Circle()
                                     .stroke(goal.color, lineWidth: 1)
                             )
+                            .shadow(radius: 1)
                             .padding(.trailing, 8)
                         VStack(alignment: .leading) {
                             Text(goal.title)
