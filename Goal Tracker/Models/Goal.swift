@@ -18,13 +18,13 @@ enum GoalType: String {
 class Goal: Identifiable {
     // Properties
     var title: String
-    var details: String?
+    var details: String = ""
     var goalType: String
     var dueDate: Date
     var isCompleted: Bool
     
     //Initializer
-    init(title: String, details: String? = nil, goalType: GoalType, dueDate: Date, isCompleted: Bool = false) {
+    init(title: String, details: String, goalType: GoalType, dueDate: Date, isCompleted: Bool = false) {
         self.title = title
         self.details = details
         self.goalType = goalType.rawValue

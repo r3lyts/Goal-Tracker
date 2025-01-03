@@ -47,6 +47,15 @@ struct GoalsView: View {
                 
             }
             .navigationTitle("Goals")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        print("Add Goal") //TODO: Add goal view here
+                    }) {
+                        Text("Add Goal")
+                    }
+                }
+            }
             Spacer()
         }
     }

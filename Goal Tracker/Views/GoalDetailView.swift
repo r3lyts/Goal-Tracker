@@ -21,7 +21,7 @@ struct GoalDetailView: View {
                         Text("\(goal.title)")
                     }
                     Section("Goal Details") {
-                        Text("\(goal.details ?? "")")
+                        Text("\(goal.details)")
                     }
                     Section("Due Date") {
                         Text("\(goal.dueDate.formatted(date: .long, time: .omitted))")
@@ -44,7 +44,7 @@ struct GoalDetailView: View {
 }
 
 #Preview {
-    GoalDetailView(goal: Goal(title: "Test Goal", details: nil, goalType: .short, dueDate: Date(), isCompleted: false))
+    GoalDetailView(goal: Goal(title: "Test Goal", details: "", goalType: .short, dueDate: Date(), isCompleted: false))
         .environmentObject(GoalsManager())
 
 }
