@@ -29,10 +29,10 @@ struct GoalDetailView: View {
                     }
                     Section("Type") {
                         Label {
-                            Text("\(goal.goalType.capitalized) Term Goal")
+                            Text("\(goal.type.rawValue.capitalized) Term Goal")
                         } icon: {
                             Image(systemName: "flag.fill")
-                                .foregroundStyle(goal.color)
+                                .foregroundStyle(goal.type.color)
                         }
                     }
                 }

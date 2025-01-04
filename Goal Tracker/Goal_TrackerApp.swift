@@ -15,6 +15,7 @@ struct Goal_TrackerApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .modelContainer(for: [Goal.self])
         }
         
     }

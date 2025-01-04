@@ -28,6 +28,7 @@ struct AddGoalView: View {
                         DatePicker(
                             "",
                             selection: $addGoalViewModel.goalDueDate,
+                            in: Date()..., // allows date to be picked from current day forward
                             displayedComponents: [.date]
                         )
                         .datePickerStyle(WheelDatePickerStyle())
@@ -36,8 +37,13 @@ struct AddGoalView: View {
                             addGoalViewModel.updateGoalType()
                         }
                     }
-                    Section("Type") {                       
-                        Text("\(addGoalViewModel.goalType.rawValue.capitalized) Term Goal")
+                    Section("Type") {
+                        Label {
+                            Text("\(addGoalViewModel.goalType.rawValue.capitalized) Term Goal")
+                        } icon: {
+                            Image(systemName: "flag.fill")
+                                .foregroundStyle(addGoalViewModel.goalType.color)
+                        }
                             
                     }
                 }
@@ -48,13 +54,12 @@ struct AddGoalView: View {
                             addGoalViewModel.saveGoal(using: modelContext)
                             dismiss()
                         }
+                        .disabled(!addGoalViewModel.isTitleValid) //button is disable if there is no title
                     }
                 }
+                
             }
         }
-       
-        
-        
     }
 }
 

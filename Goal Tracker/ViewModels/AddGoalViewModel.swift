@@ -7,6 +7,7 @@
 import Foundation
 import SwiftData
 import Observation
+import SwiftUI
 
 @Observable class AddGoalViewModel {
     
@@ -16,7 +17,14 @@ import Observation
     var goalType: GoalType = .short
     var isGoalComplete: Bool = false
     
+    var color: Color {
+        goalType.color
+    }
     
+    //Ensures title is not blank
+    var isTitleValid: Bool {
+        !goalTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
     
     
     //Calculates the goal type based on day give
@@ -42,7 +50,6 @@ import Observation
     
     //saves goal to swiftdata
     func saveGoal(using context: ModelContext) {
-        //TODO: handle saving goal logic here
         let goal = Goal(
             title: goalTitle,
             details: goalDescription,
@@ -60,5 +67,8 @@ import Observation
         }
         
     }
+    
+    
+    
     
 }

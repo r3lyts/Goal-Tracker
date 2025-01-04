@@ -12,6 +12,21 @@ enum GoalType: String {
     case short
     case medium
     case long
+    
+    
+}
+
+extension GoalType {
+    var color: Color {
+        switch self {
+        case .short:
+            return .red
+        case .medium:
+            return .orange
+        case .long:
+            return .blue
+        }
+    }
 }
 
 @Model
@@ -46,6 +61,7 @@ class Goal: Identifiable {
         get { GoalType(rawValue: goalType) ?? .short }  // Provide a default value
         set { goalType = newValue.rawValue }
     }
+    
     
     var color: Color {
         switch type {
