@@ -21,7 +21,7 @@ class Goal: Identifiable {
     var details: String = ""
     var goalType: String
     var dueDate: Date
-    var isCompleted: Bool
+    var isCompleted: Bool = false
     
     //Initializer
     init(title: String, details: String, goalType: GoalType, dueDate: Date, isCompleted: Bool = false) {

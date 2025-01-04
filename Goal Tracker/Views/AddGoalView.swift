@@ -9,11 +9,7 @@ import SwiftUI
 //HANDLE ERRORS
 // * goal title required
 struct AddGoalView: View {
-    @State private var goalTitle: String = ""
-    @State private var goalDetails: String = ""
-    var goalDueDate: Date = Date()
-    var goalType: GoalType = .long
-    var isComplete: Bool = false
+    @StateObject private var addGoalViewModel = AddGoalViewModel()
     
     var body: some View {
         
@@ -21,16 +17,26 @@ struct AddGoalView: View {
             VStack(alignment: .leading) {
                 List {
                     Section("Title") {
-                        TextField("Goal Title", text: $goalTitle)
+                        TextField("Goal Title", text: $addGoalViewModel.goalTitle)
                     }
                     Section("Description") {
-                        TextField("Description", text: $goalDetails)
+                        TextField("Description", text: $addGoalViewModel.goalDescription)
                     }
                     Section("Due Date") {
-                        
+                        DatePicker(
+                            "",
+                            selection: $addGoalViewModel.goalDueDate,
+                            displayedComponents: [.date]
+                        )
+                        .datePickerStyle(WheelDatePickerStyle())
+                        .labelsHidden()
+                        .onChange(of: addGoalViewModel.goalDueDate) {
+                            addGoalViewModel.updateGoalType()
+                        }
                     }
-                    Section("Type") {
-                        
+                    Section("Type") {                       
+                        Text("\(addGoalViewModel.goalType.rawValue.capitalized) Term Goal")
+                            
                     }
                 }
                 .navigationTitle("Add Goal")
