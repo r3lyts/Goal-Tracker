@@ -6,14 +6,15 @@
 //
 import Foundation
 import SwiftData
+import Observation
 
-class AddGoalViewModel: ObservableObject {
+@Observable class AddGoalViewModel {
     
-    @Published var goalTitle: String = ""
-    @Published var goalDescription: String = ""
-    @Published var goalDueDate: Date = Date()
-    @Published var goalType: GoalType = .short
-    @Published var isGoalComplete: Bool = false
+    var goalTitle: String = ""
+    var goalDescription: String = ""
+    var goalDueDate: Date = Date()
+    var goalType: GoalType = .short
+    var isGoalComplete: Bool = false
     
     
     

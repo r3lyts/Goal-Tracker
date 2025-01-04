@@ -11,7 +11,7 @@ import SwiftUI
 struct AddGoalView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var addGoalViewModel = AddGoalViewModel()
+    @Bindable var addGoalViewModel = AddGoalViewModel()
     
     var body: some View {
         
