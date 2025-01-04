@@ -17,35 +17,7 @@ struct GoalsView: View {
         NavigationStack {
             List {
                 ForEach(goals) { goal in
-                    NavigationLink {
-                        GoalDetailView(goal: goal)
-                    } label: {
-                        HStack {
-                            Image(systemName: "flag.fill")
-                                .foregroundStyle(goal.color)
-                                .font(.title2)
-                                .frame(width: 42, height: 42)
-                                .background(Color(.systemGray6))
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle()
-                                        .stroke(goal.color, lineWidth: 1)
-                                )
-                                .shadow(radius: 1)
-                                .padding(.trailing, 8)
-                            VStack(alignment: .leading) {
-                                Text(goal.title)
-                                    .font(.headline)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                
-                                Text("\(goal.dueDate.formatted(date: .abbreviated, time: .omitted))")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                            }
-                            Spacer()
-                        }
-                    }
+                    GoalRowView(goal: goal)
                 }
                 .onDelete { offsets in
                     goalsViewModel.deleteGoals(at: offsets, from: goals, using: modelContext)
@@ -64,6 +36,66 @@ struct GoalsView: View {
     
             Spacer()
         }
+    }
+}
+
+/**
+ Combines the GoalIconView and GoalInfoView into a unified view with navigation to the GoalDetailView
+ */
+struct GoalRowView: View {
+    let goal: Goal
+    var body: some View {
+        NavigationLink {
+            GoalDetailView(goal: goal)
+        } label: {
+            HStack {
+                GoalIconView(goal: goal)
+                GoalInfoView(goal: goal)
+                Spacer()
+            }
+        }
+    }
+}
+/**
+ Displays the Goal Icon on each row on the goal view
+ */
+struct GoalIconView: View {
+    let goal: Goal
+    
+    var body: some View {
+        Image(systemName: "flag.fill")
+            .foregroundStyle(goal.color)
+            .font(.title2)
+            .frame(width: 42, height: 42)
+            .background(Color(.systemGray6))
+            .clipShape(Circle())
+            .overlay(
+                Circle()
+                    .stroke(goal.color, lineWidth: 1)
+            )
+            .shadow(radius: 1)
+            .padding(.trailing, 8)
+    }
+}
+
+/**
+ Displays the text info for each goal in the goal view
+ */
+struct GoalInfoView: View {
+    let goal: Goal
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(goal.title)
+                .font(.headline)
+                .lineLimit(1)
+                .truncationMode(.tail)
+            
+            Text("\(goal.dueDate.formatted(date: .abbreviated, time: .omitted))")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+        }
+        Spacer()
     }
 }
 
