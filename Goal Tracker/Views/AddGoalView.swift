@@ -9,6 +9,8 @@ import SwiftUI
 //HANDLE ERRORS
 // * goal title required
 struct AddGoalView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var addGoalViewModel = AddGoalViewModel()
     
     var body: some View {
@@ -42,10 +44,9 @@ struct AddGoalView: View {
                 .navigationTitle("Add Goal")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            print("Save") //TODO: Actually save to database here
-                        }) {
-                            Text("Save Goal")
+                        Button("Save Goal") {
+                            addGoalViewModel.saveGoal(using: modelContext)
+                            dismiss()
                         }
                     }
                 }

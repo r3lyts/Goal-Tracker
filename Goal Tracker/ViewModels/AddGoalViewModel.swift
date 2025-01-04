@@ -5,13 +5,18 @@
 //  Created by Tyler Small on 1/3/25.
 //
 import Foundation
+import SwiftData
 
 class AddGoalViewModel: ObservableObject {
+    
     @Published var goalTitle: String = ""
     @Published var goalDescription: String = ""
     @Published var goalDueDate: Date = Date()
     @Published var goalType: GoalType = .short
     @Published var isGoalComplete: Bool = false
+    
+    
+    
     
     //Calculates the goal type based on day give
     //90 days <= short, 365 days <- medium, long everything else
@@ -34,8 +39,25 @@ class AddGoalViewModel: ObservableObject {
         goalType = calculateGoalType(for: goalDueDate)
     }
     
-    func saveGoal() {
+    //saves goal to swiftdata
+    func saveGoal(using context: ModelContext) {
         //TODO: handle saving goal logic here
+        let goal = Goal(
+            title: goalTitle,
+            details: goalDescription,
+            goalType: goalType,
+            dueDate: goalDueDate,
+            isCompleted: isGoalComplete
+        )
+        context.insert(goal)
+
+        do {
+            try context.save()
+            print("Goal saved successfully")
+        } catch {
+            print("Failed to save goal: \(error)")
+        }
+        
     }
     
 }
