@@ -9,6 +9,7 @@ import SwiftUI
 
 class GoalsViewModel {
     
+    
     func deleteGoals(at offsets: IndexSet, from goals: [Goal], using context: ModelContext) {
             for index in offsets {
                 let goal = goals[index]

@@ -6,21 +6,16 @@
 //
 import SwiftUI
 
-struct GoalEditView: View {
-    @State private var title: String
-    @State private var details: String
-    @State private var dueDate: Date
-    @State private var goalType: String
-    var addGoalViewModel: AddGoalViewModel
+struct EditGoalView: View {
     
     var goal: Goal
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+    @Bindable var editGoalViewModel: EditGoalViewModel
     
     init(goal: Goal) {
         self.goal = goal
-        _title = State(initialValue: goal.title)
-        _details = State(initialValue: goal.details)
-        _dueDate = State(initialValue: goal.dueDate)
-        _goalType = State(initialValue: goal.type.rawValue)
+        self._editGoalViewModel = Bindable(EditGoalViewModel(goal: goal))
     }
     
     var body: some View {
@@ -28,34 +23,44 @@ struct GoalEditView: View {
             VStack(alignment: .leading) {
                 List {
                     Section("Goal Title") {
-                        TextField("\(goal.title)", text: $title)
+                        TextField("\(editGoalViewModel.goalTitle)", text: $editGoalViewModel.goalTitle)
                     }
                     Section("Goal Details") {
-                        TextField("\(goal.details)", text: $details)
+                        TextField("\(editGoalViewModel.goalDetails)", text: $editGoalViewModel.goalDetails)
                     }
                     Section("Due Date") {
                         DatePicker(
                             "",
-                            selection: $dueDate,
+                            selection: $editGoalViewModel.goalDueDate,
                             in: Date()..., // allows date to be picked from current day forward
                             displayedComponents: [.date]
                         )
                         .datePickerStyle(WheelDatePickerStyle())
                         .labelsHidden()
-                        .onChange(of: addGoalViewModel.goalDueDate) {
-                            addGoalViewModel.updateGoalType()
+                        .onChange(of: editGoalViewModel.goalDueDate) {
+                            editGoalViewModel.updateGoalType()
                         }
                     }
                     Section("Type") {
                         Label {
-                            Text("\(goal.type.rawValue.capitalized) Term Goal")
+                            Text("\(editGoalViewModel.goalType.rawValue.capitalized) Term Goal")
                         } icon: {
                             Image(systemName: "flag.fill")
-                                .foregroundStyle(goal.type.color)
+                                .foregroundStyle(editGoalViewModel.goalType.color)
                         }
+                            
                     }
                 }
                 .navigationTitle("Edit Goal")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Save Goal") {
+                            editGoalViewModel.updateGoal(using: modelContext)
+                            dismiss()
+                        }
+                        .disabled(!editGoalViewModel.isTitleValid) //button is disable if there is no title
+                    }
+                }
                 
             }
         }

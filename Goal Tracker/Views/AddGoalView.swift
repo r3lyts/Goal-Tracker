@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-//HANDLE ERRORS
 // * goal title required
 struct AddGoalView: View {
     @Environment(\.modelContext) private var modelContext

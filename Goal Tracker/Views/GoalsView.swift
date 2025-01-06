@@ -37,6 +37,8 @@ struct GoalsView: View {
             Spacer()
         }
     }
+    
+    
 }
 
 /**
@@ -98,6 +100,7 @@ struct GoalInfoView: View {
         Spacer()
     }
 }
+
 
 #Preview {
     GoalsView()

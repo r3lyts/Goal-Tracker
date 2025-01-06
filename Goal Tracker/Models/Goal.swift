@@ -36,14 +36,16 @@ class Goal: Identifiable {
     var details: String = ""
     var goalType: String
     var dueDate: Date
+    var startDate: Date = Date()
     var isCompleted: Bool = false
     
     //Initializer
-    init(title: String, details: String, goalType: GoalType, dueDate: Date, isCompleted: Bool = false) {
+    init(title: String, details: String, goalType: GoalType, dueDate: Date, startDate: Date, isCompleted: Bool = false) {
         self.title = title
         self.details = details
         self.goalType = goalType.rawValue
         self.dueDate = dueDate
+        self.startDate = startDate
         self.isCompleted = isCompleted
     }
     

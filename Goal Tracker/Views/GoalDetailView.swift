@@ -9,9 +9,6 @@ import SwiftUI
 struct GoalDetailView: View {
     var goal: Goal
     
-    init(goal: Goal) {
-        self.goal = goal
-    }
     
     var body: some View {
         NavigationStack {
@@ -37,14 +34,17 @@ struct GoalDetailView: View {
                     }
                 }
                 .navigationTitle("Goal Details")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink(destination: EditGoalView(goal: goal)) {
+                            Text("Edit Goal")
+                        }
+                    }
+                }
             }
         }
         Spacer()
     }
 }
 
-#Preview {
-    GoalDetailView(goal: Goal(title: "Test Goal", details: "", goalType: .short, dueDate: Date(), isCompleted: false))
-        .environmentObject(GoalsManager())
 
-}
