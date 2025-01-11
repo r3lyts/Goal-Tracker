@@ -67,14 +67,10 @@ struct GoalIconView: View {
     var body: some View {
         Image(systemName: "flag.fill")
             .foregroundStyle(goal.color)
-            .font(.title2)
+            .font(.title3)
             .frame(width: 42, height: 42)
-            .background(Color(.systemGray6))
+            .background(Color(goal.color.opacity(0.1)))
             .clipShape(Circle())
-            .overlay(
-                Circle()
-                    .stroke(goal.color, lineWidth: 1)
-            )
             .shadow(radius: 1)
             .padding(.trailing, 8)
     }

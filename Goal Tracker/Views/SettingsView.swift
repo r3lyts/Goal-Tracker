@@ -14,7 +14,6 @@ struct SettingsView: View {
             .fontWeight(.bold)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading)
-        Spacer()
     }
    
 }
